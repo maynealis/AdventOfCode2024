@@ -1,7 +1,7 @@
-#include "read_file.h"
-#include <stdlib.h>
+#include <stdlib.h> // For malloc, free and realloc
 #include "advent_file_parser.h"
 
+// TODO: put this in another generic file
 bool ft_isspace(char c)
 {
     if (c == ' ' || c == '\t' || c == '\v' || c == '\r' || c == '\f')
@@ -9,6 +9,15 @@ bool ft_isspace(char c)
     return false;
 }
 
+/**
+ * @brief Creates a new DoubleIntArray structure.
+ *
+ * Allocates memory for a DoubleIntArray. This structure is used to store 
+ * two dynamically allocated arrays of integers.
+ *
+ * @return A pointer to the newly created DoubleIntArray, 
+ *         or NULL if memory allocation fails.
+ */
 DoubleIntArray *create_double_int_array()
 {
     DoubleIntArray *double_array = malloc(sizeof(DoubleIntArray));
@@ -17,6 +26,14 @@ DoubleIntArray *create_double_int_array()
     return double_array;
 }
 
+/**
+ * @brief Frees the memory allocated for a DoubleIntArray.
+ *
+ * This function releases the memory allocated for the two arrays 
+ * within the DoubleIntArray structure as well as the structure itself.
+ *
+ * @param double_array Pointer to the DoubleIntArray to free. If NULL, the function does nothing.
+ */
 void free_double_array(DoubleIntArray *double_array)
 {
     if (double_array != NULL)
@@ -30,6 +47,19 @@ void free_double_array(DoubleIntArray *double_array)
     }
 }
 
+/**
+ * @brief Adds a pair of numbers to the DoubleIntArray structure.
+ *
+ * This function reallocates memory for the arrays within the DoubleIntArray
+ * to accommodate a new pair of numbers and assigns the given values to the
+ * newly created elements.
+ *
+ * @param double_array Pointer to the DoubleIntArray structure.
+ * @param first_num The first number to add to the `first` array.
+ * @param second_num The second number to add to the `second` array.
+ * @param size The new size of the arrays after adding the numbers.
+ * @return 1 if the operation succeeds, 0 if memory allocation fails.
+ */
 char add_number(DoubleIntArray* double_array, unsigned int first_num, unsigned int second_num, int size)
 {
     unsigned int *new_first;
@@ -54,6 +84,17 @@ char add_number(DoubleIntArray* double_array, unsigned int first_num, unsigned i
     return (1);
 }
 
+/**
+ * @brief Parses input data into a DoubleIntArray structure.
+ *
+ * This function reads a string containing pairs of integers separated by 
+ * whitespace or newlines. It populates the `first` and `second` arrays 
+ * within the DoubleIntArray with the parsed integers. It handles edge 
+ * cases like multiple whitespaces and ensures proper allocation.
+ *
+ * @param str The input string containing integer pairs.
+ * @param double_array Pointer to the DoubleIntArray structure to populate.
+ */
 void parse_adv1(char *str, DoubleIntArray* double_array)
 {
     int i;
