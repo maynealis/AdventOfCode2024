@@ -17,6 +17,19 @@ bool ft_isspace(char c)
     return false;
 }
 
+/**
+ * @brief Checks if a character is a digit.
+ * 
+ * @param c The character to check.
+ * @return true if the character is a digit, false otherwise.
+ */
+bool ft_isdigit(char c)
+{
+    if (c >= '0' && c<= '9')
+        return true;
+    return false;
+}
+
 //TODO: fer que retorni el primer str
 /**
  * @brief Concatenates two strings into the first string.
