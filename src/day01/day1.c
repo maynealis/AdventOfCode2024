@@ -1,6 +1,6 @@
-#include "../utils/advent_file_parser.h"
-#include "../utils/read_file.h"
-#include "../utils/mergesort.h"
+#include "advent_file_parser.h"
+#include "read_file.h"
+#include "mergesort.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -60,7 +60,7 @@ int main(void)
     int distance;
     int similarity;
 
-    char *str = get_file_content("/Users/mayne/Documents/1-PROJECTS/Programacio/AdventOfCode2024/day1/input.txt");
+    char *str = get_file_content("day01.txt");
     DoubleIntArray *double_array = create_double_int_array();
     parse_adv1(str, double_array);
     first_sorted = malloc(double_array->size_first * sizeof(int));

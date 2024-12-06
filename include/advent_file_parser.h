@@ -2,6 +2,7 @@
 #define ADVENT_FILE_PARSER_H
 
 #include <stdbool.h> //For bool
+#include <stdlib.h> // For malloc, free and realloc
 
 //TODO:necesito la aclaracion de cada cosa dentro del struct?
 /**
@@ -21,7 +22,6 @@ typedef struct DoubleIntArray
     unsigned int size_second;   /**< The size of the second array. */
 } DoubleIntArray;
 
-bool ft_isspace(char c);
 DoubleIntArray *create_double_int_array();
 void parse_adv1(char *str, DoubleIntArray* double_array);
 

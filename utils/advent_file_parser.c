@@ -1,13 +1,5 @@
-#include <stdlib.h> // For malloc, free and realloc
 #include "advent_file_parser.h"
-
-// TODO: put this in another generic file
-bool ft_isspace(char c)
-{
-    if (c == ' ' || c == '\t' || c == '\v' || c == '\r' || c == '\f')
-        return true;
-    return false;
-}
+#include "string_functions.h"
 
 /**
  * @brief Creates a new DoubleIntArray structure.

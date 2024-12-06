@@ -10,7 +10,7 @@
  * @date 2024-12-05
  */
 
-#include <stdlib.h> // For malloc and NULL
+
 #include "mergesort.h"
 
 /**

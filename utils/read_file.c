@@ -1,3 +1,6 @@
+#include "read_file.h"
+#include "config.h"
+
 /**
  * @file read_file.c
  * @brief Functions to read the content of a file and store it into a string.
@@ -20,22 +23,9 @@
 #include <stdlib.h> // For malloc, free, realloc
 #include <stdio.h> // Fot printf (to manage error)
 #include "read_file.h"
+#include "string_functions.h"
 
-#define BUFFER_SIZE 2
-
-//TODO: separar esta funcion a un archivo de string_functions
-void string_concat(char *str1, char *str2, int size1, int size2)
-{
-    int i;
-
-    i = 0;
-    while(i < size2)
-    {
-        str1[size1 + i] = str2[i];
-        i++;
-    }
-    str1[size1 + i] = '\0';
-}
+#define BUFFER_SIZE 512
 
 /**
  * @brief Reads the content of a file into a dynamically allocated string.
@@ -78,27 +68,35 @@ char *read_file(int file_id)
 /**
  * @brief Opens a file and reads its content into a string.
  * 
- * This function opens a file given its complete path and reads its content into 
+ * This function opens a file given its name and reads its content into 
  * a string by calling `read_file`.
  * If the file cannot be opened, it prints an error message and returns `NULL`.
  * If the memory allocation fails, it returns `NULL`.
  * 
- * @param file_path The complete path to the file to be read.
+ * @param file_name The name of the file to be read (e.g. "day01.txt").
  * @return A pointer to the string containing the file's content, or `NULL` if 
  *         the file cannot be opened or an error occurs during reading.
  */
-char *get_file_content(char *file_path)
+char *get_file_content(char *file_name)
 {
     int file_id;
     char *result;
+    char *file_path;
     
+    file_path = malloc((ft_strlen(file_name) + ft_strlen(INPUT_DIR)) * sizeof(char));
+    if (file_path == NULL)
+        return NULL;
+    ft_strcpy(file_path, INPUT_DIR);
+    string_concat(file_path, file_name, ft_strlen(file_path), ft_strlen(file_name));
     file_id = open(file_path, O_RDONLY);
     if (file_id == -1)
     {
         printf("File not found.\n");
+        free(file_path);
         return NULL;
     }
     result = read_file(file_id);
     close(file_id);
+    free(file_path);
     return (result);
 }
