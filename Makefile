@@ -16,9 +16,15 @@ UTILS_OBJS = $(patsubst $(UTILS_DIR)/%.c, $(OBJ_DIR)/%.o, $(UTILS_SRCS))
 DAY01_SRCS = $(wildcard $(SRC_DIR)/day01/*.c)
 DAY01_OBJS = $(patsubst $(SRC_DIR)/day01/%.c, $(OBJ_DIR)/%.o, $(DAY01_SRCS))
 
+DAY02_SRCS = $(wildcard $(SRC_DIR)/day02/*.c)
+DAY02_OBJS = $(patsubst $(SRC_DIR)/day02/%.c, $(OBJ_DIR)/%.o, $(DAY02_SRCS))
+
 # Rules
 day01: $(UTILS_OBJS) $(DAY01_OBJS) | $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/day01 $^
+
+day02: $(UTILS_OBJS) $(DAY02_OBJS) | $(BIN_DIR)
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/day02 $^
 
 
 # Compile utility source files
@@ -27,6 +33,10 @@ $(OBJ_DIR)/%.o: $(UTILS_DIR)/%.c | $(OBJ_DIR)
 
 # Compile day01 source files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/day01/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Compile day02 source files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/day02/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
